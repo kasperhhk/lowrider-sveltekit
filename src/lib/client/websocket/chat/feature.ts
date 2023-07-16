@@ -13,7 +13,7 @@ const handlers = {
 
 export const send = {
   chatMessage: (message: OutgoingChatUserMessage) => {
-    websocketSend(message);
+    websocketSend('CHAT', 'CHATMSG', message);
   }
 }
 

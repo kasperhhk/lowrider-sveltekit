@@ -8,7 +8,7 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
     throw redirect(303, `/login?redirectTo=${url.pathname}`);
   }
 
-  const websocketServerHost = '127.0.0.1:25565';
+  const websocketServerHost = 'localhost:25565';
   const websocketServer = `wss://${websocketServerHost}/ws/`;
   return { username: user.username, websocketServer };
 };

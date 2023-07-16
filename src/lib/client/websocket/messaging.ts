@@ -1,5 +1,17 @@
+export function serialize(feature: string, type: string, message: object) {
+  const data = JSON.stringify(message);
+  const serialized = `${feature}:${type}:${data}`;
+  return serialized;
+}
+
+function splitSucksLmao(str: string) {
+  const typeIdx = str.indexOf(':', 0);
+  const dataIdx = str.indexOf(':', typeIdx+1);
+  return [str.slice(0, typeIdx), str.slice(typeIdx+1, dataIdx), str.slice(dataIdx+1)];
+}
+
 function onMessage(raw: string) {
-  const split = raw.split(':', 3);
+  const split = splitSucksLmao(raw);
   if (split.length !== 3)
     throw 'Unknown format';
 

@@ -1,4 +1,4 @@
-import { events } from './messaging';
+import { events, serialize } from './messaging';
 
 let connections = 0;
 let websocket: WebSocket | null = null;
@@ -30,10 +30,10 @@ export function disconnect() {
   }
 }
 
-export function send(msg: object) {
+export function send(feature: string, type: string, msg: object) {
   if (websocket) {
-    const data = JSON.stringify(msg);
-    websocket.send(data);
+    const serialized = serialize(feature, type, msg);
+    websocket.send(serialized);
   }
 }
 
