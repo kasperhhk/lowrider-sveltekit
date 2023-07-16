@@ -1,4 +1,4 @@
-import jose from 'jose';
+import * as jose from 'jose';
 import type { User } from './user';
 import { AUTH_RS256_PRIVATEKEY, AUTH_RS256_PUBLICKEY } from '$env/static/private';
 
