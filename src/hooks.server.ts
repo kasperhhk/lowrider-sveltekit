@@ -5,7 +5,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   const { cookies } = event;
   const jwt = cookies.get('lowrider_jwt');
   if (jwt) {
-    const user = verifyJwt(jwt);
+    const user = await verifyJwt(jwt);
     if (user) {
       event.locals.user = user;
     }

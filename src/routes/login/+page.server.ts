@@ -20,7 +20,7 @@ export const actions = {
       return fail(400, { username, incorrect: true });
     }
 
-    const jwt = createJwt(user);
+    const jwt = await createJwt(user);
     cookies.set('lowrider_jwt', jwt, {
       path: '/',
       sameSite: 'lax',
