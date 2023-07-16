@@ -24,7 +24,7 @@ export const actions = {
     cookies.set('lowrider_jwt', jwt, {
       path: '/',
       sameSite: 'lax',
-      maxAge: 60 * 5
+      maxAge: 60 * 60 * 24
     });
 
     throw redirect(303, url.searchParams.get('redirectTo') ?? '/');

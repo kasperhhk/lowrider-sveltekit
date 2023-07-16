@@ -1,19 +1,19 @@
-import { sign as jwtSign, verify as jwtVerify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import type { User } from './user';
 import { AUTH_RS256_PRIVATEKEY, AUTH_RS256_PUBLICKEY } from '$env/static/private';
 
 export function createJwt(user: User) {
-  const jwt = jwtSign(user, AUTH_RS256_PRIVATEKEY, {
+  const token = jwt.sign(user, AUTH_RS256_PRIVATEKEY, {
     algorithm: 'RS256',
-    expiresIn: '5m'
+    expiresIn: '1d'
   });
 
-  return jwt;
+  return token;
 }
 
-export function verifyJwt(jwt: string) {
+export function verifyJwt(token: string) {
   try {
-    const { payload } = jwtVerify(jwt, AUTH_RS256_PUBLICKEY, {
+    const { payload } = jwt.verify(token, AUTH_RS256_PUBLICKEY, {
       complete: true
     });
     console.log(payload);
