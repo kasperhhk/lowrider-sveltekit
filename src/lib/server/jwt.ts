@@ -16,6 +16,7 @@ export function verifyJwt(jwt: string) {
     const { payload } = jwtVerify(jwt, AUTH_RS256_PUBLICKEY, {
       complete: true
     });
+    console.log(payload);
     const user = payload as User;
     return user;
   }
