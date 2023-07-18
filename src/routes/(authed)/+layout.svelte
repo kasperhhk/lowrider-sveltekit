@@ -4,30 +4,38 @@
   export let data: PageData;
 </script>
 
-<nav>
-  <a href="https://google.com">google!</a>
+<div class="main">
+  <nav>
+    <a href="https://google.com">google!</a>
 
-  <div class="spacer"></div>
+    <div class="spacer" />
 
-  <span>{data.username}</span>
-  <form method="GET" action="/logout">
-    <button>Log out</button>
-  </form>
-</nav>
+    <span>{data.username}</span>
+    <form method="GET" action="/logout">
+      <button>Log out</button>
+    </form>
+  </nav>
 
-<slot />
+  <slot />
+</div>
 
 <style lang="scss">
   nav {
     background-color: grey;
-    position: sticky;
+
     top: 0px;
-    display: flex; 
+    display: flex;
     padding: 10px;
     gap: 10px;
   }
 
   .spacer {
     margin-left: auto;
+  }
+
+  .main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 </style>
