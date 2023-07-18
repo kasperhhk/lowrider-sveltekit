@@ -4,37 +4,14 @@
   import { connect, disconnect } from "$lib/client/websocket/client";
   import { chatMessages } from "$lib/client/websocket/chat/stores";
   import { send } from "$lib/client/websocket/send";
-  import moment from "moment";
 
   export let data: PageData;
 
-  let interval: any = undefined;
-
   onMount(() => {
-    //connect(data.websocketServer, data.username);
-    let i = 1;
-    const fill = new Array(10).fill(0).map((_) => ({
-      type: "CHAT:CHATMSG",
-      user: "test",
-      message: "message" + i++,
-      timestamp: moment(),
-    }));
-    //console.log(fill);
-    chatMessages.set(fill as any);
-
-    interval = setInterval(() => {
-      const m = {
-        type: "CHAT:CHATMSG",
-        user: "test",
-        message: "message" + i++,
-        timestamp: moment(),
-      };
-      chatMessages.update(msgs => [...msgs, m as any]);
-    }, 1000);
+    connect(data.websocketServer, data.username);
   });
 
   onDestroy(() => {
-    if (interval) clearInterval(interval);
     disconnect();
   });
 
@@ -56,12 +33,12 @@
       {#each $chatMessages as msg}
         <div>
           {#if msg.type === "CHAT:CHATMSG"}
-            <span>{msg.timestamp.format("hh:mm")}</span><span>{msg.user}</span
-            ><span>{msg.message}</span>
+            <span>{msg.timestamp.format("hh:mm")}</span>
+            <span>{msg.user}</span>
+            <span>{msg.message}</span>
           {:else if msg.type === "chatclientmessage"}
-            <span>{msg.timestamp.format("hh:mm")}</span><span
-              >{msg.message}</span
-            >
+            <span>{msg.timestamp.format("hh:mm")}</span>
+            <span>{msg.message}</span>
           {/if}
         </div>
       {/each}
