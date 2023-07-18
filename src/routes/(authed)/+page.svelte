@@ -24,7 +24,9 @@
   }
 </script>
 
-<h1>Welcome {data.username}</h1>
+<main>
+  <h1>Welcome {data.username}</h1>
+</main>
 <div>
   {#each $chatMessages as msg (msg.timestamp)}
     <div>
